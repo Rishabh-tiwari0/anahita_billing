@@ -19,8 +19,13 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "permissions": ["CAMERA"],
-      "predictiveBackGestureEnabled": false
+      "permissions": [
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "predictiveBackGestureEnabled": false,
+      "package": "com.rishabhtiwari.anahitapos"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,7 +38,20 @@
         {
           "cameraPermission": "Allow Anahita POS to scan barcodes on books and stationery products."
         }
+      ],
+      [
+        "expo-navigation-bar",
+        {
+          "enforceContrast": false,
+          "hidden": true,
+          "style": "dark"
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e0db84b2-8292-4c07-9ca3-c0b998dfa375"
+      }
+    }
   }
 }

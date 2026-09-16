@@ -16,6 +16,7 @@ import { LedgerColors } from "../../theme/colors";
 import { ThermalReceiptView } from "../../components/receipt/ThermalReceiptView";
 import { printerService } from "../../services/printerService";
 import { Button } from "../../components/common/Button";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface ReceiptModalProps {
   visible: boolean;

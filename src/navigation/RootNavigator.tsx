@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RootTabParamList } from "./types";
 import { BillingScreen } from "../screens/billing/BillingScreen";
 import { InventoryScreen } from "../screens/inventory/InventoryScreen";
@@ -12,6 +12,8 @@ import { LedgerColors } from "../theme/colors";
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export const RootNavigator: React.FC = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       initialRouteName="BillingTab"
@@ -23,9 +25,9 @@ export const RootNavigator: React.FC = () => {
           backgroundColor: LedgerColors.parchmentLight,
           borderTopWidth: 1,
           borderTopColor: LedgerColors.ruleBorder,
-          height: Platform.OS === "ios" ? 84 : 64,
-          paddingBottom: Platform.OS === "ios" ? 24 : 8,
-          paddingTop: 8,
+          height: 54 + Math.max(insets.bottom, 10),
+          paddingBottom: Math.max(insets.bottom, 10),
+          paddingTop: 6,
         },
         tabBarLabelStyle: {
           fontSize: 11,

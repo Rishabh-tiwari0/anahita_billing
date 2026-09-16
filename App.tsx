@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator, StyleSheet, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import * as NavigationBar from "expo-navigation-bar";
 import { initDatabase } from "./src/database";
 import { RootNavigator } from "./src/navigation/RootNavigator";
 import { LedgerColors } from "./src/theme/colors";
@@ -15,6 +16,16 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
+        if (Platform.OS === "android") {
+          try {
+            await NavigationBar.setBackgroundColorAsync(LedgerColors.parchmentLight);
+            await NavigationBar.setButtonStyleAsync("dark");
+            await NavigationBar.setBehaviorAsync("overlay-swipe");
+            await NavigationBar.setVisibilityAsync("hidden");
+          } catch (navBarErr) {
+            console.warn("Could not configure NavigationBar:", navBarErr);
+          }
+        }
         await initDatabase();
         setDbReady(true);
       } catch (err: any) {

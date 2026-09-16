@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LedgerColors } from "../../theme/colors";
 import { PaymentMode, PaymentSplitDetails } from "../../database/types";
 import { Button } from "../../components/common/Button";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface CheckoutModalProps {
   visible: boolean;
@@ -39,6 +40,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   grandTotal,
   onConfirmSale,
 }) => {
+  const insets = useSafeAreaInsets();
   const [customerName, setCustomerName] = useState("");
   const [paymentMode, setPaymentMode] = useState<PaymentMode>("cash");
 
@@ -401,7 +403,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           </ScrollView>
 
           {/* Bottom Action Footer */}
-          <View style={styles.sheetFooter}>
+          <View
+            style={[
+              styles.sheetFooter,
+              { paddingBottom: Math.max(insets.bottom, 12) + 8 },
+            ]}
+          >
             <Button
               title={`Confirm & Generate Bill (₹${grandTotal.toFixed(2)})`}
               onPress={handleConfirm}
