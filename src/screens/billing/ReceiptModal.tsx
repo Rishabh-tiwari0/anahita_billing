@@ -33,6 +33,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({
   onClose,
   onNewSale,
 }) => {
+  const insets = useSafeAreaInsets();
   const [printing, setPrinting] = useState(false);
   const [sharing, setSharing] = useState(false);
 
@@ -92,7 +93,12 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({
           </ScrollView>
 
           {/* Action Footer */}
-          <View style={styles.footerRow}>
+          <View
+            style={[
+              styles.footerRow,
+              { paddingBottom: Math.max(insets.bottom, 14) + 4 },
+            ]}
+          >
             <View style={styles.buttonRow}>
               <Button
                 title="Print Receipt"
